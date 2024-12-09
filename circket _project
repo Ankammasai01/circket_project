@@ -1,0 +1,104 @@
+// village premiure leaguge project //
+package circket_project;
+import java.util.*;
+public class circket_prooject {
+	
+	    public static void main(String[] args) {
+	        Scanner scanner = new Scanner(System.in);
+
+	        // Initial score details
+	        int totalRuns = 0;
+	        int totalWickets = 0;
+	        int overs = 0;
+	        final int maxOvers = 20; // For a T20 match
+
+	        // Batsman scores
+	        Map<String, Integer> batsmanScores = new LinkedHashMap<>();
+
+	        while (true) {
+	            // Display menu
+	            System.out.println("\nCricket Score Updation System");
+	            System.out.println("1. View Score");
+	            System.out.println("2. Update Runs");
+	            System.out.println("3. Update Wickets");
+	            System.out.println("4. Update Overs");
+	            System.out.println("5. Update Batsman Scores");
+	            System.out.println("6. View Batsman Scores");
+	            System.out.println("7. Exit");
+	            System.out.print("Enter your choice: ");
+
+	            int choice = scanner.nextInt();
+
+	            switch (choice) {
+	                case 1: // View score
+	                    System.out.println("\nCurrent Score:");
+	                    System.out.println("Runs: " + totalRuns);
+	                    System.out.println("Wickets: " + totalWickets + "/10");
+	                    System.out.println("Overs: " + overs + "/" + maxOvers);
+	                    break;
+
+	                case 2: // Update runs
+	                    System.out.print("Enter runs to add: ");
+	                    int runs = scanner.nextInt();
+	                    if (runs >= 0) {
+	                        totalRuns += runs;
+	                        System.out.println("Runs updated successfully.");
+	                    } else {
+	                        System.out.println("Invalid input. Runs cannot be negative.");
+	                    }
+	                    break;
+
+	                case 3: // Update wickets
+	                    System.out.print("Enter wickets to add: ");
+	                    int wickets = scanner.nextInt();
+	                    if (wickets > 0 && (totalWickets + wickets) <= 10) {
+	                        totalWickets += wickets;
+	                        System.out.println("Wickets updated successfully.");
+	                    } else {
+	                        System.out.println("Invalid input. Wickets cannot exceed 10.");
+	                    }
+	                    break;
+
+	                case 4: // Update overs
+	                    System.out.print("Enter overs to add: ");
+	                    int additionalOvers = scanner.nextInt();
+	                    if (additionalOvers > 0 && (overs + additionalOvers) <= maxOvers) {
+	                        overs += additionalOvers;
+	                        System.out.println("Overs updated successfully.");
+	                    } else {
+	                        System.out.println("Invalid input. Overs cannot exceed " + maxOvers + ".");
+	                    }
+	                    break;
+
+	                case 5: // Update batsman scores
+	                    System.out.print("Enter batsman name: ");
+	                    scanner.nextLine(); // Clear the buffer
+	                    String batsman = scanner.nextLine();
+	                    System.out.print("Enter runs scored by " + batsman + ": ");
+	                    int batsmanRuns = scanner.nextInt();
+	                    if (batsmanRuns >= 0) {
+	                        batsmanScores.put(batsman, batsmanScores.getOrDefault(batsman, 0) + batsmanRuns);
+	                        System.out.println("Batsman score updated successfully.");
+	                    } else {
+	                        System.out.println("Invalid input. Runs cannot be negative.");
+	                    }
+	                    break;
+
+	                case 6: // View batsman scores
+	                    System.out.println("\nBatsman Scores:");
+	                    for (Map.Entry<String, Integer> entry : batsmanScores.entrySet()) {
+	                        System.out.println(entry.getKey() + ": " + entry.getValue() + " runs");
+	                    }
+	                    break;
+
+	                case 7: // Exit
+	                    System.out.println("Exiting... Thank you!");
+	                    scanner.close();
+	                    System.exit(0);
+
+	                default:
+	                    System.out.println("Invalid choice. Please try again.");
+	            }
+	        }
+	    }
+	}
